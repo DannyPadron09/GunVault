@@ -1,0 +1,12 @@
+<h1 align="center">All Owners</h1>
+
+<ul>
+    <% @owners.each do |o| %>
+        <%= link_to "#{o.username}", owner_path(o) %><br>
+        <li><strong>Favorite Gun:</strong> <%= o.favorite_gun %></li><br><br>
+    <% end %>
+</ul>
+<br>
+
+<%= link_to "Sign Up New Owner", new_owner_path %>
+<%= link_to "Log Out", logout_path %>

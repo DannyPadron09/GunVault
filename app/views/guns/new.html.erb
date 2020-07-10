@@ -1,0 +1,28 @@
+<h1>Add New Gun</h1>
+
+<%= form_for @gun, url: create_gun_path(@owner) do |f| %>
+
+    <div class="form-group">
+        <%= f.label :gun_name %><br>
+        <%= f.text_field :gun_name, class: "form-control" %><br>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :caliber %><br>
+        <%= f.text_field :caliber, class: "form-control" %><br>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :ammo_quantity %><br>
+        <%= f.number_field :ammo_quantity, class: "form-control" %><br>
+    </div>
+
+    <div class="form-group">
+        <%= f.hidden_field :owner_id, value: @owner.id %><br>
+    </div>
+
+    <div class="actions">
+        <%= f.submit "Add New Gun", class:"btn btn-light" %>
+    </div>
+
+<% end %>

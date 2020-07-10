@@ -1,0 +1,8 @@
+<h1>All Ammo</h1>
+
+<% if current_user.id == @owner.ids %>
+    <% @ammunitions.each do |ammo| %>
+        <%= ammo.caliber %>
+    <% end %>
+<% end %>
+
