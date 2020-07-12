@@ -1,6 +1,7 @@
 class OwnersController < ApplicationController
     skip_before_action :verified_user, only: [:new, :create]
 
+
     def index
         @owners = Owner.all 
     end
@@ -10,16 +11,23 @@ class OwnersController < ApplicationController
     end
 
     def new
-        @owner = Owner.new 
+        @owner = Owner.new
+        @owner.guns.build(gun_name: :gun_name, caliber: :caliber, ammo_quantity: :ammo_quantity)
     end
 
     def create
-        if (@owner = Owner.create(owner_params))
-            session[:user_id] = @owner.id 
+        @owner = Owner.new(owner_params)
+        if @owner.save
             redirect_to owners_path(@owner)
         else
-            redirect_to new_owner_path
+            render new_owner_path 
         end
+        # if (@owner = Owner.create(owner_params))
+            # session[:user_id] = @owner.id 
+            # redirect_to owners_path(@owner)
+        # else
+            # render new_owner_path
+        # end
     end
 
     def edit
@@ -44,10 +52,17 @@ class OwnersController < ApplicationController
         render 'guns/show'
     end
 
+    def destroy
+        @owner = Owner.find_by(owners_id: params[:id])
+        @owner.destroy
+        flash[:notice] = "Owner Deleted"
+        redirect_to '/'
+    end
+
     private
 
     def owner_params
-        params.require(:owner).permit(:username, :password, :favorite_gun, :age, :gun_ids => [])
+        params.require(:owner).permit(:username, :password, :favorite_gun, :age, :gun_ids => [], guns_attributes: [:gun_name, :caliber, :ammo_quantity])
     end
 
 end

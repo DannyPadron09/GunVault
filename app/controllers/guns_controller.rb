@@ -6,7 +6,8 @@ class GunsController < ApplicationController
 
     def show
         @gun = Gun.find_by(gun_id: params[:id])
-        @owner = Owner.find(session[:user_id]) 
+        @owner = Owner.find(session[:user_id])
+        @ammo = Ammunition.owners_ammo(@owner)
     end
 
     def new
@@ -23,10 +24,28 @@ class GunsController < ApplicationController
         end
     end
 
+    def edit
+        @gun = Gun.find_by(gun_id: params[:id])
+        @owner = Owner.find(session[:user_id])
+    end
+
+    def update
+        @gun = Gun.find_by(gun_id: params[:id])
+        @gun.update(gun_params)
+        redirect_to owners_path
+    end
+
+    def destroy
+        @gun = Gun.find_by(gun_id: params[:id])
+        @gun.destroy
+        flash[:notice] = "Gun Deleted"
+        redirect_to owners_path
+    end
+
     private
 
     def gun_params
-        params.require(:gun).permit(:gun_name, :caliber, :ammo_quantity, :owner_id)
+        params.require(:gun).permit(:gun_name, :caliber, :owner_id)
     end
 
 end

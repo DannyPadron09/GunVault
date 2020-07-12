@@ -22,3 +22,4 @@
 <% end %>
 <br>
 <%= link_to "Home", owners_path %>
+<%= link_to "Delete Owner", @owner, method: :delete, data: { confirm: 'Are You Sure?' } %>

@@ -1,9 +1,6 @@
-<%= form_for @ammo do |f| %>
-    <div class="form-group">
-        <%= f.label :caliber %>
-        <%= f.text_field :caliber, class: "form-control" %>
-    </div>
+<h1>Edit Ammo Count</h1>
 
+<%= form_for @ammo do |f| %>
     <div class="form-group">
         <%= f.label :quantity %>
         <%= f.text_field :quantity, class: "form-control" %>
@@ -14,7 +11,6 @@
     </div>
 
     <div class="actions">
-        <%= f.submit "Add New Ammo" %>
+        <%= f.submit "Update Ammo Count" %>
     </div>
 <% end %>
-

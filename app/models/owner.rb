@@ -2,9 +2,13 @@ class Owner < ApplicationRecord
     has_secure_password
     has_many :guns
     has_many :ammunitions, through: :guns 
+    accepts_nested_attributes_for :guns
+
+    
 
     validates :username, uniqueness: true
-    # validates :password, presence: true
+    validates :username, presence: true
+    validates :password, presence: true
     
     def gun_ids=(ids)
         ids.each do |id|
@@ -17,13 +21,11 @@ class Owner < ApplicationRecord
         self.gun_ids
     end
 
-    # def self.create_with_omniauth(auth)
-    #     create! do |owner|
-    #         owner.password = auth['provider']
-    #         owner.owner_id = auth['uid']
-    #         owner.username = auth['name']
-    #         owner.save
-    #     end
-    # end
+    def ammo_ids=(ids)
+        ids.each do |id|
+            ammo = Ammunition.find_by(id: id)
+            self.ammo << ammo 
+        end
+    end
 
 end

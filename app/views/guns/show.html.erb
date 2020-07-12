@@ -1,15 +1,16 @@
-<h1>Guns show</h1>
+<h1><%= @gun.gun_name %></h1>
+<h3><%= @gun.caliber %></h3>
+Amount of Ammo in this caliber : ____
 
-<h1 align="center"><%= @owner.username %></h1>
-<h2 align="center">Favorite Gun: <%= @owner.favorite_gun %></h2>
-<h3 align="center"><%= link_to "All Owners", owners_path %></h3>
-<h3 align="center"><%= @owner.guns.each do |gun| %></h3>
-    <li><%= gun.gun_name %></li>
-<% end %>
+
+
+
 <br><br>
 
-<% if current_user.id == @owner.id %>
-    <%= link_to "Edit Owner", edit_owner_path %>
+<% if current_user.id == @gun.owner.owners_id %>
+    <%= link_to "Back to My Vault", owner_path(@owner) %>
+    <%= link_to "Edit This Gun", edit_gun_path %>
+    <%= link_to "Delete This Gun", @gun,  method: :delete, data: { confirm: 'Are You Sure?' }%>
     <%= link_to "Add New Gun", new_gun_path %>
     <%= link_to "Log Out", logout_path %>
 <% end %>
