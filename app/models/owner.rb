@@ -6,9 +6,8 @@ class Owner < ApplicationRecord
 
     
 
-    validates :username, uniqueness: true
-    validates :username, presence: true
-    validates :password, presence: true
+    validates :username, uniqueness: true, presence: true
+    
     
     def gun_ids=(ids)
         ids.each do |id|

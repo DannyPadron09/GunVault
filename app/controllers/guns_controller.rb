@@ -7,7 +7,8 @@ class GunsController < ApplicationController
     def show
         @gun = Gun.find_by(gun_id: params[:id])
         @owner = Owner.find(session[:user_id])
-        @ammo = Ammunition.owners_ammo(@owner)
+        @all_ammo = Ammunition.owners_ammo
+        @ammo = @all_ammo.guns_ammo(@gun.caliber)
     end
 
     def new

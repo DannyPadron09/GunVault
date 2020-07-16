@@ -8,7 +8,6 @@
 <br><br>
 
 <% if current_user.id == @owner.id %>
-    <%= link_to "All Guns", owners_guns_path %>
     <%= link_to "All Ammo", all_ammo_path %>
     <%= link_to "Edit Owner", edit_owner_path %>
     <%= link_to "Add New Gun", new_gun_path %>

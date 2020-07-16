@@ -12,7 +12,7 @@ class OwnersController < ApplicationController
 
     def new
         @owner = Owner.new
-        @owner.guns.build(gun_name: :gun_name, caliber: :caliber, ammo_quantity: :ammo_quantity)
+        @owner.guns.build(gun_name: :gun_name, caliber: :caliber)
     end
 
     def create
@@ -22,12 +22,6 @@ class OwnersController < ApplicationController
         else
             render new_owner_path 
         end
-        # if (@owner = Owner.create(owner_params))
-            # session[:user_id] = @owner.id 
-            # redirect_to owners_path(@owner)
-        # else
-            # render new_owner_path
-        # end
     end
 
     def edit
@@ -62,7 +56,7 @@ class OwnersController < ApplicationController
     private
 
     def owner_params
-        params.require(:owner).permit(:username, :password, :favorite_gun, :age, :gun_ids => [], guns_attributes: [:gun_name, :caliber, :ammo_quantity])
+        params.require(:owner).permit(:username, :password, :favorite_gun, :age, :gun_ids => [], guns_attributes: [:gun_name, :caliber])
     end
 
 end

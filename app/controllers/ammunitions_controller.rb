@@ -2,12 +2,13 @@ class AmmunitionsController < ApplicationController
 
     def index
         @owner = Owner.find(session[:user_id])
-        @ammunitions = Ammunition.owners_ammo(@owner)
+        @ammunitions = Ammunition.owners_ammo
+        # byebug
     end
 
     def show
         @owner = Owner.find(session[:user_id])
-        @ammo = Ammunition.find_by(ammunition_id: params[:id])
+        @ammo = Ammunition.find_by(ammunition_id: params[:ammunition_id])
     end
 
     def new
@@ -23,14 +24,13 @@ class AmmunitionsController < ApplicationController
 
     def edit
         @owner = Owner.find(session[:user_id])
-        @ammo = Ammunition.owners_ammo(@owner)
+        @ammo = Ammunition.find(params[:ammunition_id])
     end
 
     def update
-        byebug
-        @ammo = Ammunition.find_by(ammunition_id: params[:id])
+        @ammo = Ammunition.find_by(ammunition_id: params[:ammunition_id])
         @ammo.update(ammo_params)
-        redirect_to owners_path
+        redirect_to all_ammo_path
     end
 
     private

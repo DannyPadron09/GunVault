@@ -2,6 +2,8 @@ class Gun < ApplicationRecord
     belongs_to :owner
     belongs_to :ammunition
 
+    
+
     # validates :gun_name, uniqueness: true
 
     def owner_name=(name)

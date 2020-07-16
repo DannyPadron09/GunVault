@@ -18,14 +18,15 @@ Rails.application.routes.draw do
   get '/owners/:id/guns/:id', to: 'guns#show', as: 'show_gun'
   get '/owners/:id/guns/:id/edit', to: 'guns#edit', as: 'edit_gun'
   patch '/owners/:id/guns/:id', to: 'guns#update'
-  resources :owners, only: [:show, :index] do 
-    resources :gun, only: [:show, :index, :new, :create]
+  resources :owners, only: [:show, :index] do
+    resources :ammunition
+    resources :gun
   end
   resources :guns
   get 'owners/:id/ammunitions/new', to: 'ammunitions#new', as: 'new_ammo'
   post 'owners/:id/ammunitions/new', to: 'ammunitions#create'
   get 'owners/:id/ammunitions', to: 'ammunitions#index', as: 'all_ammo'
-  get '/owners/:id/ammunitions/:id', to: 'ammunitions#show', as: 'show_ammo'
-  get '/owners/:id/ammunitions/:id/edit', to: 'ammunitions#edit', as: 'edit_ammo'
-  patch '/owners/:id/ammunitions/:id', to: 'ammunitions#update'
+  get '/owners/:id/ammunitions/:ammunition_id', to: 'ammunitions#show', as: 'show_ammo'
+  get '/owners/:id/ammunitions/:ammunition_id/edit', to: 'ammunitions#edit', as: 'edit_ammo'
+  patch '/owners/:id/ammunitions/:ammunition_id', to: 'ammunitions#update', as: 'ammunition'
 end

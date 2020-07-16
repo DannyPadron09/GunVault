@@ -12,12 +12,12 @@
     <% end %>
     <br>
 
-    <div class="field">
+    <div class="form-group">
         <%= f.label :username %><br>
         <%= f.text_field :username, class: "form-control" %><br>
     </div>
 
-    <div class="field">
+    <div class="form-group">
         <%= f.label :password %><br>
         <%= f.password_field :password, class: "form-control" %><br>
     </div>
@@ -41,11 +41,6 @@
         <div class="field">
             <%= gun.label :caliber %><br>
             <%= gun.text_field :caliber, class: "form-control" %><br>
-        </div>
-
-        <div class="field">
-            <%= gun.label :ammo_quantity %><br>
-            <%= gun.number_field :ammo_quantity, class: "form-control" %><br>
         </div>
 
         <div class="field">

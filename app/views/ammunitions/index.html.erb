@@ -2,7 +2,9 @@
 
 
 <h3><% @ammunitions.each do |ammo| %></h3>
-<li><%= link_to "#{ammo.caliber}", show_ammo_path(ammo.id) %><br> Amount of Ammo in this Caliber: <%= ammo.quantity %></li>
+    <% if ammo.owner_id == current_user.id %>
+        <li><%= link_to "#{ammo.caliber}", show_ammo_path(id: @owner.owners_id, ammunition_id: ammo.id) %><br> Amount of Ammo in this Caliber: <%= ammo.quantity %></li>
+    <% end %>
 <% end %>
 
 <% if current_user.id == @owner.id %>
