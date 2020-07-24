@@ -3,14 +3,14 @@
 <h3 align="center"><%= link_to "All Owners", owners_path %></h3>
 <h2>Guns owned by <%= @owner.username %>:</h2><br>
 <h3 align="center"><% @owner.guns.each do |gun| %></h3>
-    <li><%= link_to "#{gun.gun_name}", show_gun_path(gun.id) %></li><br>
+    <li><%= link_to "#{gun.gun_name}", owner_gun_path(@owner.id, gun.id) %></li><br>
 <% end %>
 <br><br>
 
 <% if current_user.id == @owner.id %>
-    <%= link_to "All Ammo", all_ammo_path %>
+    <%= link_to "All Ammo", ammunitions_path %>
     <%= link_to "Edit Owner", edit_owner_path %>
-    <%= link_to "Add New Gun", new_gun_path %>
-    <%= link_to "Add New Ammo", new_ammo_path %>
+    <%= link_to "Add New Gun", new_owner_gun_path(@owner) %>
+    <%= link_to "Add New Ammo", new_ammunition_path %>
     <%= link_to "Log Out", logout_path %>
 <% end %>

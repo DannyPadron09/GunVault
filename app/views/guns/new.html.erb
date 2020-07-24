@@ -1,6 +1,16 @@
 <h1>Add New Gun</h1>
 
-<%= form_for @gun, url: create_gun_path(@owner) do |f| %>
+<%= form_for(@gun) do |f| %>
+    <% if @gun.errors.any? %>
+        <div id="error_explanation">
+            <h2>There are some errors:</h2>
+            
+            <% @gun.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </div>
+    <% end %>
+    <br>
 
     <div class="form-group">
         <%= f.label :gun_name %><br>
@@ -9,7 +19,7 @@
 
     <div class="form-group">
         <%= f.label :caliber %><br>
-        <%= f.text_field :caliber, class: "form-control" %><br>
+        <%= f.collection_select :ammunition_id, Ammunition.all, :ammunition_id, :caliber, include_blank: true %>
     </div>
 
     <div class="form-group">

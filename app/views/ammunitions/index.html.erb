@@ -1,13 +1,14 @@
 <h1>All Ammo</h1>
 
-
-<h3><% @ammunitions.each do |ammo| %></h3>
-    <% if ammo.owner_id == current_user.id %>
-        <li><%= link_to "#{ammo.caliber}", show_ammo_path(id: @owner.owners_id, ammunition_id: ammo.id) %><br> Amount of Ammo in this Caliber: <%= ammo.quantity %></li>
-    <% end %>
+<%= form_tag ammunitions_path, method: :get do %>
+        <%= submit_tag "Refill Ammo", name: "refill_ammo", value: "AmmoThatNeedsRefilling" %>
 <% end %>
 
-<% if current_user.id == @owner.id %>
-    <%= link_to "My Vault", owner_path(@owner) %>
-    <%= link_to "Log Out", logout_path %>
+<a href=<%= ammunitions_path %>><button>All Ammo</button></a>
+
+
+<h3><% @ammo.each do |ammo| %></h3>
+        <li><%= link_to "#{ammo.caliber}", ammunition_path(ammo.id) %><br> Amount of ammo in this caliber : <%= ammo.quantity %>
 <% end %>
+<br><br>
+<%= link_to "Back to My Vault", owner_path(@owner) %>

@@ -6,20 +6,19 @@ class GunsController < ApplicationController
 
     def show
         @gun = Gun.find_by(gun_id: params[:id])
-        @owner = Owner.find(session[:user_id])
-        @all_ammo = Ammunition.owners_ammo
-        @ammo = @all_ammo.guns_ammo(@gun.caliber)
+        @owner = Owner.find_by(owner_id: params[:owner_id])
     end
 
     def new
         @gun = Gun.new
-        @owner = Owner.find(session[:user_id])
+        @owner = Owner.find_by(owner_id: params[:owner_id])
     end
 
     def create
-        gun = Gun.new(gun_params)
-        if gun.save
-            redirect_to owners_path
+        @gun = Gun.new(gun_params)
+        @owner = Owner.find(session[:user_id])
+        if @gun.save
+            redirect_to owner_path(@owner)
         else
             render 'guns/new'
         end
@@ -27,7 +26,7 @@ class GunsController < ApplicationController
 
     def edit
         @gun = Gun.find_by(gun_id: params[:id])
-        @owner = Owner.find(session[:user_id])
+        @owner = Owner.find_by(owner_id: params[:owner_id])
     end
 
     def update
@@ -46,7 +45,7 @@ class GunsController < ApplicationController
     private
 
     def gun_params
-        params.require(:gun).permit(:gun_name, :caliber, :owner_id)
+        params.require(:gun).permit(:gun_name, :owner_id, :gun_id, :ammunition_id)
     end
 
 end

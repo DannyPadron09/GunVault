@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_174005) do
+ActiveRecord::Schema.define(version: 2020_07_23_222801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "ammunitions", primary_key: "ammunition_id", force: :cascade do |t|
     t.string "caliber"
-    t.integer "owner_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "quantity"
@@ -32,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_174005) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "owners", primary_key: "owners_id", force: :cascade do |t|
+  create_table "owners", primary_key: "owner_id", id: :bigint, default: -> { "nextval('owners_owners_id_seq'::regclass)" }, force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
     t.string "favorite_gun"

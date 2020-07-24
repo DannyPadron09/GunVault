@@ -8,11 +8,12 @@ class SessionController < ApplicationController
     def create
         auth = request.env["omniauth.auth"]
         if @owner = Owner.find_by(username: params[:username])
-            return head(:forbidden) unless @owner.authenticate(params[:password])
-            if session[:user_id] = @owner.id
-                 redirect_to owner_path(@owner)
+            if @owner && @owner.authenticate(params[:password])
+                session[:user_id] = @owner.id
+                redirect_to owner_path(@owner)
             else
-                redirect_to new_owner_path
+                flash[:notice] = "Login Failed"
+                render 'session/new'
             end
         else
             @owner = Owner.find_or_initialize_by(uid: auth['uid'])

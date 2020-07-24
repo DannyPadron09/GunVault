@@ -1,56 +1,6 @@
 <h1>Add New Owner</h1>
 
-<%= form_for(@owner) do |f| %>
-    <% if @owner.errors.any? %>
-        <div id="error_explanation">
-            <h2>There are some errors:</h2>
-            
-            <% @owner.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-        </div>
-    <% end %>
-    <br>
-
-    <div class="form-group">
-        <%= f.label :username %><br>
-        <%= f.text_field :username, class: "form-control" %><br>
-    </div>
-
-    <div class="form-group">
-        <%= f.label :password %><br>
-        <%= f.password_field :password, class: "form-control" %><br>
-    </div>
-
-    <div class="field">
-        <%= f.label :favorite_gun %><br>
-        <%= f.text_field :favorite_gun, class: "form-control" %><br>
-    </div>
-
-    <div class="field">
-        <%= f.label :age %><br>
-        <%= f.number_field :age, class: "form-control" %><br>
-    </div>
-
-    <%= f.fields_for :guns do |gun| %>
-        <div class="field">
-            <%= gun.label :gun_name %><br>
-            <%= gun.text_field :gun_name, class: "form-control" %><br>
-        </div>
-
-        <div class="field">
-            <%= gun.label :caliber %><br>
-            <%= gun.text_field :caliber, class: "form-control" %><br>
-        </div>
-
-        <div class="field">
-            <%= gun.hidden_field :owner_id, value: @owner.id %><br>
-        </div>
-    <% end %>
-
-    <div class="actions">
-        <%= f.submit "Sign Up" %>
-    </div>
-<% end %>
+<%= render "form" %>
 <br>
+
 <%= link_to "Home", root_path %>

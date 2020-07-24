@@ -1,25 +1,11 @@
 <h3>Edit Owner</h3>
+<% if current_user == @owner %>
+    <%= render "form" %>
+    <br>
 
-<%= form_for @owner do |f| %>
-    <div class="form-group">
-        <%= f.label :username %><br>
-        <%= f.text_field :username, class: "form-control" %><br>
-    </div>
-
-    <div class="form-group">
-        <%= f.label :favorite_gun %><br>
-        <%= f.text_field :favorite_gun, class: "form-control" %><br>
-    </div>
-
-    <div class="form-group">
-        <%= f.label :age %><br>
-        <%= f.number_field :age, class: "form-control" %><br>
-    </div>
-
-    <div class="actions">
-        <%= f.submit "Update Owner" %>
-    </div>
+    <%= link_to "Home", owners_path %>
+    <%= link_to "Delete Owner", @owner, method: :delete, data: { confirm: 'Are You Sure?' } %>
+<% else %>
+    <h3>You are not this owner you can't be here</h3>
+    <%= link_to "Sign Up or Log In", root_path %>
 <% end %>
-<br>
-<%= link_to "Home", owners_path %>
-<%= link_to "Delete Owner", @owner, method: :delete, data: { confirm: 'Are You Sure?' } %>
